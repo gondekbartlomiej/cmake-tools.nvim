@@ -234,6 +234,14 @@ function utils.prepare_build_directory(build_dir, kits, kit, variant)
     return ""
   end)
 
+  build_dir = build_dir:gsub("${lowercaseVariant:(%w+)}", function(v)
+    if variant and variant[v] then
+      return string.lower(variant[v])
+    end
+
+    return ""
+  end)
+
   return build_dir
 end
 
